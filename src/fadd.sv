@@ -1,5 +1,3 @@
-// Code your design here
-
 
 module fadd ( input in1, input in2, input cin, output sum, output cout);
   
