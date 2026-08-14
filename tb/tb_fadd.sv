@@ -1,5 +1,4 @@
-// Code your testbench here
-// or browse Examples
+
 
 
 module tb_fadd;
