@@ -31,12 +31,13 @@ module ctrlu (
     reg_read_addr = operand[2:0];
     acc_src = 2'b00;
     out_enable = 0;
-    
+    sub_cin = 0;
+      
     case ( opcode )
       
       4'b0001: begin
-        acc_src = 1;
-        acc_load = 2'b01;
+        acc_src = 2'b01;
+        acc_load = 1;
         pc_increment = 1;
       end
       
