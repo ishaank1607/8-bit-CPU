@@ -15,7 +15,8 @@ module ctrlu (
     output logic pc_load,
     output logic pc_increment,
   	output logic [1:0] acc_src,
-    output logic out_enable
+    output logic out_enable,
+    output logic sub_cin
 );
   
   always @(*) begin
@@ -57,6 +58,7 @@ module ctrlu (
         acc_load = 2'b01;
         reg_write_enable = 0;
         pc_increment = 1;
+        sub_cin = 1;
       end
       
       4'b0101:begin
