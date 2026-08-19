@@ -4,7 +4,8 @@
 
 module alu_4bit ( input[3:0] A, 
                  input[3:0] B, 
-                 input Cin, 
+                 input Cin,
+                 input sub_cin,
                  input[2:0] opcode, 
                  output logic [3:0] result, 
                  output logic C, 
