@@ -21,7 +21,7 @@ module alu_4bit ( input[3:0] A,
   wire sub_cout;
   
   add_4bit instance1 ( .a(A), .b(B), .cin(Cin), .sum(add_result), .cout(add_cout) );
-  add_4bit instance2 ( .a(A), .b(~B), .cin(1'd1), .sum(sub_result), .cout(sub_cout) ); //inverted B and used cin = 1 for two's pair
+  add_4bit instance2 ( .a(A), .b(~B), .cin(sub_cin), .sum(sub_result), .cout(sub_cout) ); //inverted B and used cin = 1 for two's pair
   
   
   always @(*) begin
