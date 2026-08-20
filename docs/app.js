@@ -443,24 +443,25 @@ function populateExamples() {
 
 function renderRegFile() {
   el.regfile.innerHTML = cpu.regs.map((v, i) =>
-    `<div class="reg-box"><span class="reg-name"><a href="#term-register" class="term-link">R${i}</a></span><span class="reg-val">${hex2(v)}</span></div>`).join('');
+    `<div class="reg-box"><span class="reg-name"><a href="#term-register" class="term-link">R${i}</a></span><span class="reg-val">${dec3(v)}</span></div>`).join('');
 }
 
 
 function renderState() {
-  el.pcVal.textContent = hex2(cpu.pc);
-  el.accVal.textContent = hex2(cpu.acc);
+  el.pcVal.textContent = dec3(cpu.pc);
+  el.accVal.textContent = dec3(cpu.acc);
   el.zVal.textContent = cpu.zflag;
   el.cVal.textContent = cpu.cflag;
   renderRegFile();
 
   if (cpu.outValid) {
-    el.outValue.textContent = hex2(cpu.outData) + ' (live this step)';
+    el.outValue.textContent = dec3(cpu.outData) + ' (live this step)';
     el.outValue.classList.add('live');
   } else {
-    el.outValue.textContent = '00 (idle)';
+    el.outValue.textContent = '000 (idle)';
     el.outValue.classList.remove('live');
   }
+
 
   const instrByte = memory[cpu.pc];
   if (cpu.halted) {
