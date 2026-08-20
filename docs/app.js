@@ -241,17 +241,12 @@ const EXAMPLES = {
 
 ; You try it: set Input value to a 3, click Step (executes the first IN), then
 ; set Input value to 5 and click Step three more times. After ADD R0,
-; ACC should read 08, and OUT will show 08 too. Try with other numbers too!
-
-; Note that the output is is hexadecimal, so if your result is 
-; greater than 10 (like 5 + 7), it will show in hexadecimal
-; but the answer will still be correct. Search "## hexadecimal to decimal" and 
-; you'll see the answer you were looking for.
+; ACC should read 08, and OUT will show 08 too. Try it with other numbers too!
 
 IN          ; ACC = first number (from Input value)
-STORE R0    ; R0 = ACC   (save the first number so it isn't lost)
+STORE R0    ; R0 = ACC (save first number so it isn't lost)
 IN          ; ACC = second number (from Input value)
-ADD R0      ; ACC = ACC + R0   (this is the actual addition!)
+ADD R0      ; ACC = ACC + R0 (this is the actual addition!)
 OUT         ; send ACC to Output`
   },
   first: {
