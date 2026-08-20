@@ -421,6 +421,7 @@ const el = {
 };
 
 const hex2 = n => n.toString(16).padStart(2, '0');
+const dec3 = n => String(n).padStart(3, '0');
 
 function populateIsaTable() {
   el.isaTableBody.innerHTML = ISA_INFO.map(([bits, mnem, effect]) =>
