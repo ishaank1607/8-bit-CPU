@@ -12,36 +12,92 @@
     <p class="links"><a href="https://github.com/ishaank1607/8-bit-CPU" target="_blank" rel="noopener">View the SystemVerilog source & testbenches on GitHub →</a></p>
   </header>
 
-  <section class="panel about-panel">
-    <h2>What exactly is this?</h2>
-    <p>What I've built is a custom 8-bit CPU, designed and verified from scratch in SystemVerilog. Specifically, it's an accumulator-based processor with its own 16-instruction set, built module-by-module (full adder → ALU → register file → control unit → full datapath) and verified with self-checking testbenches, including an exhaustive 262,144-combination sweep of the control unit that turned up zero failures. This page doesn't run that SystemVerilog directly. Instead it runs a JavaScript model of the exact same instruction set, so you can try it without installing a simulator.</p>
-    <p>You'll also notice that some of the programs to load (or maybe even one you wrote) will eventually display red text telling you that the program cannot run. The CPU still did what it should, but I am still working at it to accomodate larger and larger programs. Check the github for when I commit updates!</p>
+    <section class="panel about-panel">
+    <h2>What this is (and what a CPU even is)</h2>
+    <p>A <a href="#term-cpu" class="term-link">CPU</a> is the part of a computer that actually runs programs — it reads instructions one at a time and carries them out, over and over, extremely fast. Every computer and phone has one; this project is a working CPU built completely from scratch, as an actual digital circuit (not a program), to understand how one really works under the hood.</p>
+    <p>It was designed and tested in <a href="#term-systemverilog" class="term-link">SystemVerilog</a>, a language used to describe real hardware circuits — the same kind of process used to design actual chips. It's a simplified version: 8 bits wide, with 16 possible instructions, built and verified module by module (the full circuit design and test results are on <a href="https://github.com/ishaank1607/8-bit-CPU" target="_blank" rel="noopener">GitHub</a>). This page runs a separate JavaScript model of that same design, so you can watch it run without installing anything.</p>
+
     <h3>How it works</h3>
     <ul>
-      <li>Every instruction is 8 bits: a 4-bit opcode and a 4-bit operand.</li>
-      <li>There's a single accumulator, <strong>A</strong>. Almost every instruction reads a register, combines it with <strong>A</strong> in the ALU, and writes the result back to <strong>A</strong>.</li>
-      <li>8 general-purpose registers, <strong>R0–R7</strong>, reached with <code>LOAD</code>/<code>STORE</code>.</li>
-      <li>A control unit decodes and fully executes one instruction per clock cycle - there's no multi-stage pipeline.</li>
-      <li>Two condition flags, <strong>Z</strong> and <strong>C</strong>, latch only when an arithmetic/logic instruction runs, and stay put otherwise - <code>JZ</code>/<code>JC</code> branch on whichever value they last latched.</li>
-      <li><code>JMP</code>/<code>JZ</code>/<code>JC</code> targets are only 4 bits wide, so branches can reach addresses 0–15 - a real limitation of this instruction set, not something the simulator imposes.</li>
+      <li>Every <a href="#term-isa" class="term-link">instruction</a> is 8 bits: a 4-bit <a href="#term-opcode" class="term-link">opcode</a> (what to do) and a 4-bit <a href="#term-operand" class="term-link">operand</a> (what to do the operation to).</li>
+      <li>There's a single <a href="#term-accumulator" class="term-link">accumulator</a>, <strong>A</strong>. Almost every instruction reads a <a href="#term-register" class="term-link">register</a>, combines it with <strong>A</strong> in the <a href="#term-alu" class="term-link">ALU</a>, and writes the result back to <strong>A</strong>.</li>
+      <li>8 general-purpose registers, <strong>R0–R7</strong>, each holding one 8-bit number, reached with <code>LOAD</code>/<code>STORE</code>.</li>
+      <li>A <a href="#term-control-unit" class="term-link">control unit</a> decodes and fully executes one instruction per <a href="#term-clock-cycle" class="term-link">clock cycle</a> — there's no multi-stage pipeline.</li>
+      <li>Two condition <a href="#term-flag" class="term-link">flags</a>, <strong>Z</strong> and <strong>C</strong>, latch only when an arithmetic/logic instruction runs, and stay put otherwise — <code>JZ</code>/<code>JC</code> <a href="#term-branch" class="term-link">branch</a> on whichever value they last latched.</li>
+      <li><code>JMP</code>/<code>JZ</code>/<code>JC</code> targets are only 4 bits wide, so branches can reach addresses 0–15 — a real limitation of this instruction set, not something the simulator imposes.</li>
     </ul>
 
-    <h3>What can you use this for?</h3>
+    <h3>What you can use this for</h3>
     <ul>
       <li>Watch the CPU execute a real program instruction-by-instruction, with every register, flag, and the PC visible the whole time.</li>
-      <li>Write your own small programs with the built-in assembler (mnemonics, registers, and labels) and step through exactly what they do.</li>
-      <li>Load the four example programs - each one is a real test case that was actually used to verify the hardware design itself, including the exact operands that caught a real subtraction bug during development.</li>
+      <li>Write your own small programs with the built-in <a href="#term-assembler" class="term-link">assembler</a> (mnemonics, registers, and labels) and step through exactly what they do.</li>
+      <li>Load the four example programs. Each one is a real test case that was actually used to verify the hardware design itself, including the exact operands that caught a real subtraction bug during development.</li>
     </ul>
 
     <h3>How to use this page</h3>
     <ol>
-      <li>New here? The page loads with "Adding two numbers" already in the editor — the comments in it walk through exactly what each line does. Otherwise, pick a different example from the dropdown, or write your own assembly.</li>
-      <li>Click <strong>Assemble</strong> - it shows the raw hex bytes it produced, or an error if something's wrong.</li>
+      <li>New here? The page loads with "Adding two numbers" already in the editor. The comments in it walk through exactly what each line does. You can pick a different example from the dropdown, or write your own assembly.</li>
+      <li>Click <strong>Assemble</strong>. The built-in assembler turns your program into the raw hex bytes the CPU runs, or points out a specific error if something's wrong.</li>
       <li>Click <strong>Step</strong> to execute one instruction at a time, or <strong>Run</strong> to let it go automatically (the slider controls speed).</li>
       <li>Watch <strong>PC / ACC / Z / C / R0–R7</strong> update, the datapath diagram highlight which blocks are active that cycle, and the execution log describe exactly what each instruction did.</li>
-      <li>Some programs read the <strong>Input value</strong> box - set it before stepping past an <code>IN</code> instruction, the same way you'd drive an input signal on a real testbench.</li>
+      <li>Some programs read the <strong>Input value</strong> box. Set it before stepping past an <code>IN</code> instruction, the same way you'd drive an input signal on a real testbench.</li>
     </ol>
   </section>
+
+  <section class="panel glossary-panel" id="glossary">
+    <h2>Glossary</h2>
+    <p class="glossary-intro">Click any underlined term on this page to jump straight to its definition here.</p>
+    <dl>
+      <dt id="term-cpu">CPU (Central Processing Unit)</dt>
+      <dd>The part of a computer that actually runs programs. It reads instructions one at a time, from memory, and carries each one out. Everything else (memory, screen, keyboard) exists to feed it work or show its results.</dd>
+
+      <dt id="term-systemverilog">SystemVerilog</dt>
+      <dd>A hardware description language (HDL). Instead of writing a program that runs <em>on</em> a chip, you use it to describe the actual digital circuit <em>of</em> the chip itself (wires, logic gates, registers), which can then be simulated or manufactured. I have written and verified this CPU's design entirely in SystemVerilog.</dd>
+
+      <dt id="term-register">Register</dt>
+      <dd>A small storage slot inside the CPU that holds exactly one number while it's being worked with. It's almost like a labeled box you can put a value in and take it back out later. This CPU has 8 of them (R0–R7), each holding one 8-bit number.</dd>
+
+      <dt id="term-accumulator">Accumulator</dt>
+      <dd>The CPU's main "working" register, usually just called <strong>A</strong> or <strong>ACC</strong>. Almost every operation in this CPU reads from or writes to it. Think of it as the number currently "in your hand" while you're doing arithmetic.</dd>
+
+      <dt id="term-alu">ALU (Arithmetic Logic Unit)</dt>
+      <dd>The part of the CPU that actually performs math and logic — addition, subtraction, AND/OR/XOR, shifting a number's bits left or right, and so on.</dd>
+
+      <dt id="term-opcode">Opcode</dt>
+      <dd>The part of an instruction that specifies <em>what to do</em> ("add," "jump," "store," etc.) This CPU's opcode is 4 bits, giving exactly 16 possible instructions.</dd>
+
+      <dt id="term-operand">Operand</dt>
+      <dd>The part of an instruction that specifies <em>what number/data to do the operation (from the opcode) to.</em> This is usually which register to use, or which address to jump to.</dd>
+
+      <dt id="term-isa">Instruction / ISA (Instruction Set Architecture)</dt>
+      <dd>A single command the CPU understands (like <code>ADD</code> or <code>JMP</code>) is an instruction. The complete list of every instruction a CPU can execute is called its ISA, which is like the CPU's entire "vocabulary."</dd>
+
+      <dt id="term-pc">Program Counter (PC)</dt>
+      <dd>Keeps track of which instruction the CPU is currently executing like a bookmark in a book. It normally moves forward by one after every instruction, unless a jump instruction points it somewhere else.</dd>
+
+      <dt id="term-flag">Flag</dt>
+      <dd>A single true/false bit the CPU sets after certain operations, so later instructions can make decisions based on it. This CPU has a Zero flag (was the last result exactly 0?) and a Carry flag (did the last operation overflow, or need to borrow?).</dd>
+
+      <dt id="term-control-unit">Control Unit</dt>
+      <dd>The part of the CPU that reads the current instruction and decides, that instant, which other parts (the ALU, a register, the program counter, etc.) should be active, basically the CPU's traffic controller.</dd>
+
+      <dt id="term-datapath">Datapath</dt>
+      <dd>The actual wires and components, like registers, the ALU, memory, etc. that a value physically flows through while an instruction executes.</dd>
+
+      <dt id="term-branch">Branch / Jump</dt>
+      <dd>An instruction that can make the CPU skip to a different instruction instead of simply moving to the next one in order. This is how loops and if/else-style decisions are built at the hardware level.</dd>
+
+      <dt id="term-assembler">Assembler</dt>
+      <dd>A tool that translates human-readable instruction names (like <code>ADD R0</code>) into the raw binary/hex bytes the CPU actually reads and executes. This page has a small assembler built specifically for this project's instruction set.</dd>
+
+      <dt id="term-clock-cycle">Clock cycle</dt>
+      <dd>CPUs don't run continuously. They're driven by a repeating "tick" called a clock, and do a fixed amount of work on each tick. This CPU fully executes one instruction per clock cycle.</dd>
+
+      <dt id="term-hex">Hex (hexadecimal)</dt>
+      <dd>A base-16 number system (digits 0–9, then A–F) commonly used to write binary values more compactly than 1s and 0s. For example, the number 15 is written as <code>F</code> in hex, and 255 (the largest number this CPU's 8-bit values can hold) is <code>FF</code>.</dd>
+    </dl>
+  </section>
+
 
   <main>
     <section class="panel editor-panel">
