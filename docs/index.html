@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>8-bit CPU — Interactive Simulator</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>8-bit CPU</h1>
+    <p class="subtitle">A SystemVerilog CPU, built and verified from scratch — this page runs a JavaScript model of the exact same instruction set, faithful down to its real hardware quirks.</p>
+    <p class="links"><a href="https://github.com/ishaank1607/8-bit-CPU" target="_blank" rel="noopener">View the SystemVerilog source & testbenches on GitHub →</a></p>
+  </header>
+
+  <main>
+    <section class="panel editor-panel">
+      <h2>Assembly</h2>
+      <div class="examples">
+        <label for="example-select">Load example:</label>
+        <select id="example-select">
+          <option value="">— choose —</option>
+        </select>
+      </div>
+      <textarea id="asm-source" spellcheck="false"></textarea>
+      <div class="editor-controls">
+        <button id="assemble-btn">Assemble</button>
+        <span id="assemble-status"></span>
+      </div>
+      <pre id="hex-output" class="hex-output"></pre>
+      <div class="isa-ref">
+        <h3>Instruction set</h3>
+        <table>
+          <thead><tr><th>Op</th><th>Mnemonic</th><th>Effect</th></tr></thead>
+          <tbody id="isa-table-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel state-panel">
+      <h2>Processor state</h2>
+      <div class="controls">
+        <button id="reset-btn">Reset</button>
+        <button id="step-btn">Step</button>
+        <button id="run-btn">Run</button>
+        <button id="pause-btn" disabled>Pause</button>
+        <label class="speed-label">Speed
+          <input type="range" id="speed-slider" min="1" max="20" value="5">
+        </label>
+      </div>
+
+      <div class="io-row">
+        <label>Input value (IN reads this)
+          <input type="number" id="in-data" min="0" max="255" value="5">
+        </label>
+        <div class="out-display">
+          Output: <span id="out-value">00 (idle)</span>
+        </div>
+      </div>
+
+      <div class="registers">
+        <div class="reg-box"><span class="reg-name">PC</span><span class="reg-val" id="pc-val">00</span></div>
+        <div class="reg-box"><span class="reg-name">ACC</span><span class="reg-val" id="acc-val">00</span></div>
+        <div class="reg-box"><span class="reg-name">Z</span><span class="reg-val" id="z-val">0</span></div>
+        <div class="reg-box"><span class="reg-name">C</span><span class="reg-val" id="c-val">0</span></div>
+      </div>
+      <div class="regfile" id="regfile"></div>
+
+      <svg id="datapath" viewBox="0 0 640 260" class="datapath"></svg>
+
+      <h3>Current instruction</h3>
+      <div class="current-instr" id="current-instr">—</div>
+
+      <h3>Execution log</h3>
+      <div class="log" id="log"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Every opcode this simulator implements was exhaustively verified against the real SystemVerilog RTL — the ALU and control unit were swept across every reachable input combination, and the full instruction set was proven correct end-to-end through the actual datapath, including a real subtraction-carry bug and a missing flags register that were found and fixed along the way. <a href="https://github.com/ishaank1607/8-bit-CPU" target="_blank" rel="noopener">Read the source →</a></p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
