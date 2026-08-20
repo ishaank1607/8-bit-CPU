@@ -228,21 +228,23 @@ const EXAMPLES = {
     addition: {
     name: 'Adding two numbers (start here)',
     source: `; ADDING TWO NUMBERS, the simplest possible program.
-;
+
 ; This CPU has one main "workspace" called the accumulator (ACC). Almost
 ; everything happens by moving a value into ACC, then doing something to it.
-;
+
 ; Steps that happen in the CPU:
 ;   1. Read the first number in from the Input box into ACC
 ;   2. Save it into register R0, since ACC is about to be overwritten
 ;   3. Read the second number in from the Input box into ACC
 ;   4. Add R0 (the first number) to ACC (the second number)
 ;   5. Send ACC to the Output
-;
-; You try it: set Input value to 3, click Step (executes the first IN), then
+
+; You try it: set Input value to a 3, click Step (executes the first IN), then
 ; set Input value to 5 and click Step three more times. After ADD R0,
-; ACC should read 08 — and OUT will show 08 too. Note that the output is in
-; hexadecimal, so if your result is >10 (like 5 + 7), it will show in hexadecimal
+; ACC should read 08, and OUT will show 08 too. Try with other numbers too!
+
+; Note that the output is is hexadecimal, so if your result is 
+; greater than 10 (like 5 + 7), it will show in hexadecimal
 ; but the answer will still be correct. Search "## hexadecimal to decimal" and 
 ; you'll see the answer you were looking for.
 
