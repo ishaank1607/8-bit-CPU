@@ -2,44 +2,44 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>8-bit CPU — Interactive Simulator</title>
+<title>Ishaan's 8-bit CPU: An Interactive Simulator</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
     <h1>8-bit CPU</h1>
-    <p class="subtitle">A SystemVerilog CPU, built and verified from scratch — this page runs a JavaScript model of the exact same instruction set, faithful down to its real hardware quirks.</p>
+    <p class="subtitle">A SystemVerilog CPU, built and verified from scratch - this page runs a JavaScript model of the exact same instruction set, faithful down to its real hardware quirks.</p>
     <p class="links"><a href="https://github.com/ishaank1607/8-bit-CPU" target="_blank" rel="noopener">View the SystemVerilog source & testbenches on GitHub →</a></p>
   </header>
 
   <section class="panel about-panel">
     <h2>What this is</h2>
-    <p>A custom 8-bit CPU, designed and verified from scratch in SystemVerilog — an accumulator-based processor with its own 16-instruction set, built module-by-module (full adder → ALU → register file → control unit → full datapath) and verified with self-checking testbenches, including an exhaustive 262,144-combination sweep of the control unit that turned up zero failures. This page doesn't run that SystemVerilog directly — it runs a JavaScript model of the exact same instruction set, so you can try it without installing a simulator.</p>
+    <p>A custom 8-bit CPU, designed and verified from scratch in SystemVerilog - an accumulator-based processor with its own 16-instruction set, built module-by-module (full adder → ALU → register file → control unit → full datapath) and verified with self-checking testbenches, including an exhaustive 262,144-combination sweep of the control unit that turned up zero failures. This page doesn't run that SystemVerilog directly - it runs a JavaScript model of the exact same instruction set, so you can try it without installing a simulator.</p>
 
     <h3>How it works</h3>
     <ul>
       <li>Every instruction is 8 bits: a 4-bit opcode and a 4-bit operand.</li>
-      <li>There's a single accumulator, <strong>A</strong> — almost every instruction reads a register, combines it with <strong>A</strong> in the ALU, and writes the result back to <strong>A</strong>.</li>
+      <li>There's a single accumulator, <strong>A</strong> - almost every instruction reads a register, combines it with <strong>A</strong> in the ALU, and writes the result back to <strong>A</strong>.</li>
       <li>8 general-purpose registers, <strong>R0–R7</strong>, reached with <code>LOAD</code>/<code>STORE</code>.</li>
-      <li>A control unit decodes and fully executes one instruction per clock cycle — there's no multi-stage pipeline.</li>
-      <li>Two condition flags, <strong>Z</strong> and <strong>C</strong>, latch only when an arithmetic/logic instruction runs, and stay put otherwise — <code>JZ</code>/<code>JC</code> branch on whichever value they last latched.</li>
-      <li><code>JMP</code>/<code>JZ</code>/<code>JC</code> targets are only 4 bits wide, so branches can reach addresses 0–15 — a real limitation of this instruction set, not something the simulator imposes.</li>
+      <li>A control unit decodes and fully executes one instruction per clock cycle - there's no multi-stage pipeline.</li>
+      <li>Two condition flags, <strong>Z</strong> and <strong>C</strong>, latch only when an arithmetic/logic instruction runs, and stay put otherwise - <code>JZ</code>/<code>JC</code> branch on whichever value they last latched.</li>
+      <li><code>JMP</code>/<code>JZ</code>/<code>JC</code> targets are only 4 bits wide, so branches can reach addresses 0–15 - a real limitation of this instruction set, not something the simulator imposes.</li>
     </ul>
 
     <h3>What you can use this for</h3>
     <ul>
       <li>Watch the CPU execute a real program instruction-by-instruction, with every register, flag, and the PC visible the whole time.</li>
       <li>Write your own small programs with the built-in assembler (mnemonics, registers, and labels) and step through exactly what they do.</li>
-      <li>Load the four example programs — each one is a real test case that was actually used to verify the hardware design itself, including the exact operands that caught a real subtraction bug during development.</li>
+      <li>Load the four example programs - each one is a real test case that was actually used to verify the hardware design itself, including the exact operands that caught a real subtraction bug during development.</li>
     </ul>
 
     <h3>How to use this page</h3>
     <ol>
       <li>Pick an example from the dropdown, or write your own assembly in the editor.</li>
-      <li>Click <strong>Assemble</strong> — it shows the raw hex bytes it produced, or an error if something's wrong.</li>
+      <li>Click <strong>Assemble</strong> - it shows the raw hex bytes it produced, or an error if something's wrong.</li>
       <li>Click <strong>Step</strong> to execute one instruction at a time, or <strong>Run</strong> to let it go automatically (the slider controls speed).</li>
       <li>Watch <strong>PC / ACC / Z / C / R0–R7</strong> update, the datapath diagram highlight which blocks are active that cycle, and the execution log describe exactly what each instruction did.</li>
-      <li>Some programs read the <strong>Input value</strong> box — set it before stepping past an <code>IN</code> instruction, the same way you'd drive an input signal on a real testbench.</li>
+      <li>Some programs read the <strong>Input value</strong> box - set it before stepping past an <code>IN</code> instruction, the same way you'd drive an input signal on a real testbench.</li>
     </ol>
   </section>
 
@@ -49,7 +49,7 @@
       <div class="examples">
         <label for="example-select">Load example:</label>
         <select id="example-select">
-          <option value="">— choose —</option>
+          <option value="">- choose -</option>
         </select>
       </div>
       <textarea id="asm-source" spellcheck="false"></textarea>
@@ -99,7 +99,7 @@
       <svg id="datapath" viewBox="0 0 640 260" class="datapath"></svg>
 
       <h3>Current instruction</h3>
-      <div class="current-instr" id="current-instr">—</div>
+      <div class="current-instr" id="current-instr">-</div>
 
       <h3>Execution log</h3>
       <div class="log" id="log"></div>
@@ -107,7 +107,7 @@
   </main>
 
   <footer>
-    <p>Every opcode this simulator implements was exhaustively verified against the real SystemVerilog RTL — the ALU and control unit were swept across every reachable input combination, and the full instruction set was proven correct end-to-end through the actual datapath, including a real subtraction-carry bug and a missing flags register that were found and fixed along the way. <a href="https://github.com/ishaank1607/8-bit-CPU" target="_blank" rel="noopener">Read the source →</a></p>
+    <p>Every opcode this simulator implements was exhaustively verified against the real SystemVerilog RTL - the ALU and control unit were swept across every reachable input combination, and the full instruction set was proven correct end-to-end through the actual datapath, including a real subtraction-carry bug and a missing flags register that were found and fixed along the way. <a href="https://github.com/ishaank1607/8-bit-CPU" target="_blank" rel="noopener">Read the source →</a></p>
   </footer>
 
   <script src="app.js"></script>
