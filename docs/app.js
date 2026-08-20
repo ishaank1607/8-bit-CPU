@@ -225,6 +225,30 @@ const ISA_INFO = [
 ];
 
 const EXAMPLES = {
+    addition: {
+    name: 'Adding two numbers (start here)',
+    source: `; ADDING TWO NUMBERS — the simplest possible program.
+;
+; This CPU has one main "workspace" called the accumulator (ACC) — almost
+; everything happens by moving a value into ACC, then doing something to it.
+;
+; Steps:
+;   1. Read the first number in from the Input box into ACC
+;   2. Save it into register R0, since ACC is about to be overwritten
+;   3. Read the second number in from the Input box into ACC
+;   4. Add R0 (the first number) to ACC (the second number)
+;   5. Send ACC to the Output
+;
+; Try it: set Input value to 3, click Step (executes the first IN), then
+; set Input value to 5 and click Step three more times. After ADD R0,
+; ACC should read 08 — and OUT will show 08 too.
+
+IN          ; ACC = first number (from Input value)
+STORE R0    ; R0 = ACC   (save the first number so it isn't lost)
+IN          ; ACC = second number (from Input value)
+ADD R0      ; ACC = ACC + R0   (this is the actual addition!)
+OUT         ; send ACC to Output`
+  },
   first: {
     name: 'First verified program (LOAD/STORE/ADD/OUT/NOT)',
     source: `; The very first program this CPU ran correctly end-to-end.
@@ -526,5 +550,5 @@ el.exampleSelect.addEventListener('change', () => {
 
 populateIsaTable();
 populateExamples();
-el.asmSource.value = EXAMPLES.first.source;
+el.asmSource.value = EXAMPLES.addition.source;
 doAssemble();
