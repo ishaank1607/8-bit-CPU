@@ -46,61 +46,6 @@
     </ol>
   </section>
 
-  <section class="panel glossary-panel" id="glossary">
-    <h2>Glossary</h2>
-    <p class="glossary-intro">Click any underlined term on this page to jump straight to its definition here.</p>
-    <dl>
-      <dt id="term-cpu">CPU (Central Processing Unit)</dt>
-      <dd>The part of a computer that actually runs programs. It reads instructions one at a time, from memory, and carries each one out. Everything else (memory, screen, keyboard) exists to feed it work or show its results.</dd>
-
-      <dt id="term-systemverilog">SystemVerilog</dt>
-      <dd>A hardware description language (HDL). Instead of writing a program that runs <em>on</em> a chip, you use it to describe the actual digital circuit <em>of</em> the chip itself (wires, logic gates, registers), which can then be simulated or manufactured. I have written and verified this CPU's design entirely in SystemVerilog.</dd>
-
-      <dt id="term-register">Register</dt>
-      <dd>A small storage slot inside the CPU that holds exactly one number while it's being worked with. It's almost like a labeled box you can put a value in and take it back out later. This CPU has 8 of them (R0–R7), each holding one 8-bit number.</dd>
-
-      <dt id="term-accumulator">Accumulator</dt>
-      <dd>The CPU's main "working" register, usually just called <strong>A</strong> or <strong>ACC</strong>. Almost every operation in this CPU reads from or writes to it. Think of it as the number currently "in your hand" while you're doing arithmetic.</dd>
-
-      <dt id="term-alu">ALU (Arithmetic Logic Unit)</dt>
-      <dd>The part of the CPU that actually performs math and logic — addition, subtraction, AND/OR/XOR, shifting a number's bits left or right, and so on.</dd>
-
-      <dt id="term-opcode">Opcode</dt>
-      <dd>The part of an instruction that specifies <em>what to do</em> ("add," "jump," "store," etc.) This CPU's opcode is 4 bits, giving exactly 16 possible instructions.</dd>
-
-      <dt id="term-operand">Operand</dt>
-      <dd>The part of an instruction that specifies <em>what number/data to do the operation (from the opcode) to.</em> This is usually which register to use, or which address to jump to.</dd>
-
-      <dt id="term-isa">Instruction / ISA (Instruction Set Architecture)</dt>
-      <dd>A single command the CPU understands (like <code>ADD</code> or <code>JMP</code>) is an instruction. The complete list of every instruction a CPU can execute is called its ISA, which is like the CPU's entire "vocabulary."</dd>
-
-      <dt id="term-pc">Program Counter (PC)</dt>
-      <dd>Keeps track of which instruction the CPU is currently executing like a bookmark in a book. It normally moves forward by one after every instruction, unless a jump instruction points it somewhere else.</dd>
-
-      <dt id="term-flag">Flag</dt>
-      <dd>A single true/false bit the CPU sets after certain operations, so later instructions can make decisions based on it. This CPU has a Zero flag (was the last result exactly 0?) and a Carry flag (did the last operation overflow, or need to borrow?).</dd>
-
-      <dt id="term-control-unit">Control Unit</dt>
-      <dd>The part of the CPU that reads the current instruction and decides, that instant, which other parts (the ALU, a register, the program counter, etc.) should be active, basically the CPU's traffic controller.</dd>
-
-      <dt id="term-datapath">Datapath</dt>
-      <dd>The actual wires and components, like registers, the ALU, memory, etc. that a value physically flows through while an instruction executes.</dd>
-
-      <dt id="term-branch">Branch / Jump</dt>
-      <dd>An instruction that can make the CPU skip to a different instruction instead of simply moving to the next one in order. This is how loops and if/else-style decisions are built at the hardware level.</dd>
-
-      <dt id="term-assembler">Assembler</dt>
-      <dd>A tool that translates human-readable instruction names (like <code>ADD R0</code>) into the raw binary/hex bytes the CPU actually reads and executes. This page has a small assembler built specifically for this project's instruction set.</dd>
-
-      <dt id="term-clock-cycle">Clock cycle</dt>
-      <dd>CPUs don't run continuously. They're driven by a repeating "tick" called a clock, and do a fixed amount of work on each tick. This CPU fully executes one instruction per clock cycle.</dd>
-
-      <dt id="term-hex">Hex (hexadecimal)</dt>
-      <dd>A base-16 number system (digits 0–9, then A–F) commonly used to write binary values more compactly than 1s and 0s. For example, the number 15 is written as <code>F</code> in hex, and 255 (the largest number this CPU's 8-bit values can hold) is <code>FF</code>.</dd>
-    </dl>
-  </section>
-
-
   <main>
     <section class="panel editor-panel">
       <h2>Assembly</h2>
@@ -164,6 +109,60 @@
     </section>
   </main>
 
+  <section class="panel glossary-panel" id="glossary">
+    <h2>Glossary</h2>
+    <p class="glossary-intro">Click any underlined term on this page to jump straight to its definition here.</p>
+    <dl>
+      <dt id="term-cpu">CPU (Central Processing Unit)</dt>
+      <dd>The part of a computer that actually runs programs. It reads instructions one at a time, from memory, and carries each one out. Everything else (memory, screen, keyboard) exists to feed it work or show its results.</dd>
+
+      <dt id="term-systemverilog">SystemVerilog</dt>
+      <dd>A hardware description language (HDL). Instead of writing a program that runs <em>on</em> a chip, you use it to describe the actual digital circuit <em>of</em> the chip itself (wires, logic gates, registers), which can then be simulated or manufactured. I have written and verified this CPU's design entirely in SystemVerilog.</dd>
+
+      <dt id="term-register">Register</dt>
+      <dd>A small storage slot inside the CPU that holds exactly one number while it's being worked with. It's almost like a labeled box you can put a value in and take it back out later. This CPU has 8 of them (R0–R7), each holding one 8-bit number.</dd>
+
+      <dt id="term-accumulator">Accumulator</dt>
+      <dd>The CPU's main "working" register, usually just called <strong>A</strong> or <strong>ACC</strong>. Almost every operation in this CPU reads from or writes to it. Think of it as the number currently "in your hand" while you're doing arithmetic.</dd>
+
+      <dt id="term-alu">ALU (Arithmetic Logic Unit)</dt>
+      <dd>The part of the CPU that actually performs math and logic — addition, subtraction, AND/OR/XOR, shifting a number's bits left or right, and so on.</dd>
+
+      <dt id="term-opcode">Opcode</dt>
+      <dd>The part of an instruction that specifies <em>what to do</em> ("add," "jump," "store," etc.) This CPU's opcode is 4 bits, giving exactly 16 possible instructions.</dd>
+
+      <dt id="term-operand">Operand</dt>
+      <dd>The part of an instruction that specifies <em>what number/data to do the operation (from the opcode) to.</em> This is usually which register to use, or which address to jump to.</dd>
+
+      <dt id="term-isa">Instruction / ISA (Instruction Set Architecture)</dt>
+      <dd>A single command the CPU understands (like <code>ADD</code> or <code>JMP</code>) is an instruction. The complete list of every instruction a CPU can execute is called its ISA, which is like the CPU's entire "vocabulary."</dd>
+
+      <dt id="term-pc">Program Counter (PC)</dt>
+      <dd>Keeps track of which instruction the CPU is currently executing like a bookmark in a book. It normally moves forward by one after every instruction, unless a jump instruction points it somewhere else.</dd>
+
+      <dt id="term-flag">Flag</dt>
+      <dd>A single true/false bit the CPU sets after certain operations, so later instructions can make decisions based on it. This CPU has a Zero flag (was the last result exactly 0?) and a Carry flag (did the last operation overflow, or need to borrow?).</dd>
+
+      <dt id="term-control-unit">Control Unit</dt>
+      <dd>The part of the CPU that reads the current instruction and decides, that instant, which other parts (the ALU, a register, the program counter, etc.) should be active, basically the CPU's traffic controller.</dd>
+
+      <dt id="term-datapath">Datapath</dt>
+      <dd>The actual wires and components, like registers, the ALU, memory, etc. that a value physically flows through while an instruction executes.</dd>
+
+      <dt id="term-branch">Branch / Jump</dt>
+      <dd>An instruction that can make the CPU skip to a different instruction instead of simply moving to the next one in order. This is how loops and if/else-style decisions are built at the hardware level.</dd>
+
+      <dt id="term-assembler">Assembler</dt>
+      <dd>A tool that translates human-readable instruction names (like <code>ADD R0</code>) into the raw binary/hex bytes the CPU actually reads and executes. This page has a small assembler built specifically for this project's instruction set.</dd>
+
+      <dt id="term-clock-cycle">Clock cycle</dt>
+      <dd>CPUs don't run continuously. They're driven by a repeating "tick" called a clock, and do a fixed amount of work on each tick. This CPU fully executes one instruction per clock cycle.</dd>
+
+      <dt id="term-hex">Hex (hexadecimal)</dt>
+      <dd>A base-16 number system (digits 0–9, then A–F) commonly used to write binary values more compactly than 1s and 0s. For example, the number 15 is written as <code>F</code> in hex, and 255 (the largest number this CPU's 8-bit values can hold) is <code>FF</code>.</dd>
+    </dl>
+  </section>
+  
   <footer>
     <p>Every opcode this simulator implements was exhaustively verified against the real SystemVerilog RTL - the ALU and control unit were swept across every reachable input combination, and the full instruction set was proven correct end-to-end through the actual datapath, including a real subtraction-carry bug and a missing flags register that were found and fixed along the way. <a href="https://github.com/ishaank1607/8-bit-CPU" target="_blank" rel="noopener">Read the source →</a></p>
   </footer>
