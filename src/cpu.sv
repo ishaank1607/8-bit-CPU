@@ -1,15 +1,4 @@
 // top level CPU module design
-`include "pc.sv"
-`include "instr_mem.sv"
-`include "isa.sv"
-`include "ctrlu.sv"
-`include "reg_file.sv"
-`include "alu_8bit.sv"
-`include "acc_mux.sv"
-`include "acc.sv"
-`include "flags.sv"
-
-
 
 module cpu #(
     parameter PROGRAM_FILE = "program.hex"
