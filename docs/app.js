@@ -438,8 +438,9 @@ function populateExamples() {
 
 function renderRegFile() {
   el.regfile.innerHTML = cpu.regs.map((v, i) =>
-    `<div class="reg-box"><span class="reg-name">R${i}</span><span class="reg-val">${hex2(v)}</span></div>`).join('');
+    `<div class="reg-box"><span class="reg-name"><a href="#term-register" class="term-link">R${i}</a></span><span class="reg-val">${hex2(v)}</span></div>`).join('');
 }
+
 
 function renderState() {
   el.pcVal.textContent = hex2(cpu.pc);
