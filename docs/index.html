@@ -10,12 +10,14 @@
     <h1>Ishaan's 8-bit CPU: An Interactive Simulator</h1>
     <p class="subtitle">A SystemVerilog CPU that I have built and verified from scratch. This page runs a JavaScript model of the exact same instruction set, faithful down to its real hardware attributes.</p>
     <p class="links"><a href="https://github.com/ishaank1607/8-bit-CPU" target="_blank" rel="noopener">View the SystemVerilog source & testbenches on GitHub →</a></p>
+    
   </header>
 
     <section class="panel about-panel">
     <h2>What this is (and what a CPU even is)</h2>
     <p>A <a href="#term-cpu" class="term-link">CPU</a> is the part of a computer that actually runs programs — it reads instructions one at a time and carries them out, over and over, extremely fast. Every computer and phone has one; this project is a working CPU built completely from scratch, as an actual digital circuit (not a program), to understand how one really works under the hood.</p>
     <p>It was designed and tested in <a href="#term-systemverilog" class="term-link">SystemVerilog</a>, a language used to describe real hardware circuits. It's the same kind of process used to design actual chips. This is a simplified version: 8 bits wide, with 16 possible instructions, built and verified module by module (the full circuit design and test results are on <a href="https://github.com/ishaank1607/8-bit-CPU" target="_blank" rel="noopener">GitHub</a>). This page runs a separate JavaScript model of that same design, so you can watch it run without installing anything.</p>
+    <p> This is a small, educational CPU, not like a commercial one. My goal wasn't to build something that competes with a real processor. It was to actually design, build, and verify one from scratch in SystemVerilog, similar to how hardware is built, instead of just studying theory.</p>
 
     <h3>How it works</h3>
     <ul>
