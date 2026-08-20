@@ -5,9 +5,7 @@ module tb_instr_mem;
   reg[7:0] addr;
   wire[7:0] instr;
   
-  instr_mem instance1 (.address(addr),
-                       .instruction(instr) );
-  
+  instr_mem #(.PROGRAM_FILE("tb/tb_instr_mem_program.hex")) instance1 (.address(addr), .instruction(instr) );
   
   reg[7:0] exp_instr;
   reg [7:0] mem_test [0:255];
