@@ -22,10 +22,10 @@ Single-cycle, accumulator-based, 8-bit datapath throughout.
 | Flags | Latched `Z` (zero) and `C` (carry), updated only on ALU-producing instructions |
 
 ### Module hierarchy
--fadd.sv, bitadd4.sv (add_4bit), alu_4bit.sv, alu_8bit.sv
--reg_8bit.sv, reg_file.sv
--acc.sv, acc_mux.sv, pc.sv, instr_mem.sv, isa.sv, ctrlu.sv, flags.sv
--cpu.sv (top-level integration)
+-fadd.sv, bitadd4.sv (add_4bit), alu_4bit.sv, alu_8bit.sv  
+-reg_8bit.sv, reg_file.sv  
+-acc.sv, acc_mux.sv, pc.sv, instr_mem.sv, isa.sv, ctrlu.sv, flags.sv  
+-cpu.sv (top-level integration)  
 
 
 ## Instruction Set
