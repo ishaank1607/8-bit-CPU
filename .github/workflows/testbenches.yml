@@ -1,0 +1,52 @@
+name: RTL Testbenches
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  simulate:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        testbench:
+          - tb_fadd
+          - tb_bitadd4
+          - tb_alu_4bit
+          - tb_alu_8bit
+          - tb_reg_8bit
+          - tb_reg_file
+          - tb_isa
+          - tb_instr_mem
+          - tb_pc
+          - tb_ctrlu
+          - tb_acc_mux
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Icarus Verilog
+        run: sudo apt-get update && sudo apt-get install -y iverilog
+
+      - name: Compile and run ${{ matrix.testbench }}
+        run: |
+          iverilog -g2012 -o sim src/*.sv tb/${{ matrix.testbench }}.sv
+          vvp sim | tee output.log
+
+      - name: Check for failures
+        run: |
+          if grep -qiE 'pass.*=.*fail.*=' output.log; then
+            failcount=$(grep -iE 'pass.*=.*fail.*=' output.log | tail -1 | grep -oE '[0-9]+' | tail -1)
+            echo "Detected fail count: $failcount"
+            if [ "$failcount" != "0" ]; then
+              echo "::error::${{ matrix.testbench }} reported $failcount failures"
+              exit 1
+            fi
+          elif grep -qx "FAIL" output.log; then
+            echo "::error::${{ matrix.testbench }} printed a FAIL line"
+            exit 1
+          else
+            echo "No failure indicators found."
+          fi
