@@ -1,5 +1,5 @@
 // design for register file
-`include "reg_8bit.sv"
+
 
 module reg_file (input clk,
                   input reset,
