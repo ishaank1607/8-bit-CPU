@@ -31,7 +31,7 @@ acc.sv, acc_mux.sv, pc.sv, instr_mem.sv, isa.sv, ctrlu.sv, flags.sv
 ## Instruction Set
 
 | Opcode | Mnemonic | Operation |
-
+|---|---|---|
 | `0000` | `NOP` | no operation |
 | `0001` | `LOAD Rn` | `A ← R[n]` |
 | `0010` | `STORE Rn` | `R[n] ← A` |
@@ -56,7 +56,7 @@ acc.sv, acc_mux.sv, pc.sv, instr_mem.sv, isa.sv, ctrlu.sv, flags.sv
 Every RTL module has a self-checking SystemVerilog testbench with an independently computed reference model, and every one is exhaustive over its full reachable input space unless noted. All 11 are continuously re-verified on every commit via the GitHub Actions badge above.
 
 | Module | Test space | Result |
-
+|---|---|---|
 | `fadd` | 8 (directed, full truth table) | 8 PASS |
 | `add_4bit` | 512 | 0 failures |
 | `alu_4bit` | 4,096 | 0 failures |
