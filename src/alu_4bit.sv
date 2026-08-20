@@ -1,6 +1,6 @@
 // 4-bit ALU module
 
-`include "bitadd4.sv"
+
 
 module alu_4bit ( input[3:0] A, 
                  input[3:0] B, 
