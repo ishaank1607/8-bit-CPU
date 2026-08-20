@@ -7,26 +7,26 @@
 </head>
 <body>
   <header>
-    <h1>8-bit CPU</h1>
-    <p class="subtitle">A SystemVerilog CPU, built and verified from scratch - this page runs a JavaScript model of the exact same instruction set, faithful down to its real hardware quirks.</p>
+    <h1>Ishaan's 8-bit CPU: An Interactive Simulator</h1>
+    <p class="subtitle">A SystemVerilog CPU that I have built and verified from scratch. This page runs a JavaScript model of the exact same instruction set, faithful down to its real hardware attributes.</p>
     <p class="links"><a href="https://github.com/ishaank1607/8-bit-CPU" target="_blank" rel="noopener">View the SystemVerilog source & testbenches on GitHub →</a></p>
   </header>
 
   <section class="panel about-panel">
-    <h2>What this is</h2>
-    <p>A custom 8-bit CPU, designed and verified from scratch in SystemVerilog - an accumulator-based processor with its own 16-instruction set, built module-by-module (full adder → ALU → register file → control unit → full datapath) and verified with self-checking testbenches, including an exhaustive 262,144-combination sweep of the control unit that turned up zero failures. This page doesn't run that SystemVerilog directly - it runs a JavaScript model of the exact same instruction set, so you can try it without installing a simulator.</p>
-
+    <h2>What exactly is this?</h2>
+    <p>What I've built is a custom 8-bit CPU, designed and verified from scratch in SystemVerilog. Specifically, it's an accumulator-based processor with its own 16-instruction set, built module-by-module (full adder → ALU → register file → control unit → full datapath) and verified with self-checking testbenches, including an exhaustive 262,144-combination sweep of the control unit that turned up zero failures. This page doesn't run that SystemVerilog directly. Instead it runs a JavaScript model of the exact same instruction set, so you can try it without installing a simulator.</p>
+    <p>You'll also notice that some of the programs to load (or maybe even one you wrote) will eventually display red text telling you that the program cannot run. The CPU still did what it should, but I am still working at it to accomodate larger and larger programs. Check the github for when I commit updates!</p>
     <h3>How it works</h3>
     <ul>
       <li>Every instruction is 8 bits: a 4-bit opcode and a 4-bit operand.</li>
-      <li>There's a single accumulator, <strong>A</strong> - almost every instruction reads a register, combines it with <strong>A</strong> in the ALU, and writes the result back to <strong>A</strong>.</li>
+      <li>There's a single accumulator, <strong>A</strong>. Almost every instruction reads a register, combines it with <strong>A</strong> in the ALU, and writes the result back to <strong>A</strong>.</li>
       <li>8 general-purpose registers, <strong>R0–R7</strong>, reached with <code>LOAD</code>/<code>STORE</code>.</li>
       <li>A control unit decodes and fully executes one instruction per clock cycle - there's no multi-stage pipeline.</li>
       <li>Two condition flags, <strong>Z</strong> and <strong>C</strong>, latch only when an arithmetic/logic instruction runs, and stay put otherwise - <code>JZ</code>/<code>JC</code> branch on whichever value they last latched.</li>
       <li><code>JMP</code>/<code>JZ</code>/<code>JC</code> targets are only 4 bits wide, so branches can reach addresses 0–15 - a real limitation of this instruction set, not something the simulator imposes.</li>
     </ul>
 
-    <h3>What you can use this for</h3>
+    <h3>What can you use this for?</h3>
     <ul>
       <li>Watch the CPU execute a real program instruction-by-instruction, with every register, flag, and the PC visible the whole time.</li>
       <li>Write your own small programs with the built-in assembler (mnemonics, registers, and labels) and step through exactly what they do.</li>
