@@ -2,9 +2,9 @@
 
 ![RTL Testbenches](https://github.com/ishaank1607/8-bit-CPU/actions/workflows/testbenches.yml/badge.svg)
 
-A custom 8-bit CPU designed from scratch in SystemVerilog. An accumulator-based processor with a 16-instruction ISA, built module by module (full adder → ALU → register file → control unit → full datapath) and exhaustively verified with self-checking testbenches.
+This is a custom 8-bit CPU that I designed and verified from scratch in SystemVerilog. It's an accumulator-based processor with a 16-instruction ISA, built module by module (full adder, ALU, register file, control unit, full datapath) and exhaustively verified with self-checking testbenches.
 
-**[Try it live](https://ishaank1607.github.io/8-bit-CPU/)** — a JavaScript reimplementation of the verified ISA running in-browser, with a step/run interface, live register and flag display, and an animated datapath diagram. Not the RTL itself (there's no practical way to run SystemVerilog client-side without a much heavier toolchain), but built to match the real hardware's verified semantics exactly.
+**[Try it live](https://ishaank1607.github.io/8-bit-CPU/)** - This is a JavaScript reimplementation of the verified ISA running in-browser, with a step/run interface, live register and flag display, and an animated datapath diagram. Not built with the RTL itself (there's no practical way to run SystemVerilog client-side without a much heavier toolchain), but built to match the real hardware's verified semantics exactly.
 
 ## Architecture
 
@@ -22,8 +22,8 @@ Single-cycle, accumulator-based, 8-bit datapath throughout.
 | Flags | Latched `Z` (zero) and `C` (carry), updated only on ALU-producing instructions |
 
 ### Module hierarchy
-fadd.sv → bitadd4.sv (add_4bit) → alu_4bit.sv → alu_8bit.sv
-reg_8bit.sv → reg_file.sv
+fadd.sv, bitadd4.sv (add_4bit), alu_4bit.sv, alu_8bit.sv
+reg_8bit.sv, reg_file.sv
 acc.sv, acc_mux.sv, pc.sv, instr_mem.sv, isa.sv, ctrlu.sv, flags.sv
 └── cpu.sv (top-level integration)
 
@@ -71,7 +71,7 @@ Every RTL module has a self-checking SystemVerilog testbench with an independent
 | **Total** | **1,327,888 exhaustive combinations** | **0 failures** |
 
 
-**Swap tb_ctrlu.sv for any file in tb/ to run that module's testbench. The full suite runs automatically on every push via .github/workflows/testbenches.yml.
+**Swap tb_ctrlu.sv for any file in tb/ to run that module's testbench. The full suite runs automatically on every push via .github/workflows/testbenches.yml.**
 
 The full CPU has also been validated end-to-end through 3 directed integration testbenches (13 self-checking assertions total), covering all 16 ISA opcodes running through the real, integrated datapath, including a targeted case forcing a two's-complement borrow across the ALU's internal nibble boundary, and all four combinations of `JZ`/`JC` taken and not-taken.
 
