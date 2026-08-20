@@ -31,7 +31,8 @@ module ctrlu (
     reg_read_addr = operand[2:0];
     acc_src = 2'b00;
     out_enable = 0;
-    
+    sub_cin = 0;
+      
     case ( opcode )
       
       4'b0001: begin
@@ -58,6 +59,7 @@ module ctrlu (
         acc_load = 2'b01;
         reg_write_enable = 0;
         pc_increment = 1;
+        sub_cin = 1;
       end
       
       4'b0101:begin
