@@ -36,6 +36,7 @@ module tb_alu_4bit;
   alu_4bit instance1 (.A(a),
                       .B(b),
                       .Cin(cin),
+                      .sub_cin(1'b1),
                       .result(sum),
                       .C(cout),
                       .opcode(op),
