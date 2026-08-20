@@ -1,6 +1,6 @@
 // 8-bit ALU design
 
-`include "alu_4bit.sv"
+
 
 module alu_8bit ( input [7:0] A,
                  input[7:0] B,
