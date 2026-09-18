@@ -5,7 +5,11 @@ module cpu #(
 ) ( input clk,
     input reset,
     input[7:0] in_data,
-    output[7:0] out_data );
+   output[7:0] out_data,
+   output [7:0] debug_acc,
+   output [7:0] debug_pc,
+   output debug_z,
+   output debug_c);
   
   //pc to instr wires
   wire [7:0] pc_value;
