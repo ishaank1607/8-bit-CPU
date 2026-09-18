@@ -12,8 +12,10 @@ module clk_div ( input reset, input clock, output logic clk);
   always @(posedge clock) begin
     counter <= counter + 1;
     if (reset)
+      begin
       clk <= 0;
       counter <= 0;
+      end
     else if ( (counter == 25'b1111111111111111111111111) )
       begin
       clk <= ~clk;
