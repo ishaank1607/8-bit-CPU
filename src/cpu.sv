@@ -69,5 +69,9 @@ module cpu #(
   acc instance_acc ( .clk(clk), .reset(reset), .load(acc_load), .d(acc_mux_out), .q(acc_value) );
   
   assign out_data = out_enable ? acc_value : 8'b0;
-  
+  assign debug_acc = acc_value;
+  assign debug_pc  = pc_value;
+  assign debug_z   = zflag;
+  assign debug_c   = cflag;
+
 endmodule
