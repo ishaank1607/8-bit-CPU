@@ -16,7 +16,7 @@ module basys_top (
   // free-running slow clock for hands-off "watch it run" mode
   wire free_run_clk;
   clk_div divider (
-    .reset(reset),
+      .reset(1'b0),
     .clock(clk),
     .clk(free_run_clk)
   );
