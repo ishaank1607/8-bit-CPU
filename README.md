@@ -6,7 +6,7 @@ This is a custom 8-bit CPU that I designed and verified from scratch in SystemVe
 
 **[Try it live](https://ishaank1607.github.io/8-bit-CPU/)** - This is a JavaScript reimplementation of the verified ISA running in-browser, with a step/run interface, live register and flag display, and an animated datapath diagram. Not built with the RTL itself (there's no practical way to run SystemVerilog client-side without a much heavier toolchain), but built to match the real hardware's verified semantics exactly.
 
-I am also implementing it onto a Basys 3 FPGA. I will add a video soon.
+FPGA implementation video on the link above.
 
 ## Architecture
 
